@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Tickets.Application.Entities
 {
-    class User:FullAuditedEntityBase<int>
+    class Client:User
     {
-
+        public string FullName { get; set; }
+      
     }
 }
