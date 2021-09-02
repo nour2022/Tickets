@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tickets.Application.Entities
+namespace Tickets.Application.Projects.Entities
 {
     class ProjectTeam
     {

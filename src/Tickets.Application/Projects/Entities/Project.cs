@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tickets.Application.Entities;
 
-namespace Tickets.Application.Entities
+namespace Tickets.Application.Projects.Entities
 {
-    class Project:FullAuditedEntityBase<int>
+   public class Project : FullAuditedEntityBase<int>
     {
         public string Title { get; set; }
         public int StatusId { get; set; }
