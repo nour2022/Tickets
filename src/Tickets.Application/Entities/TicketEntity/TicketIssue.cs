@@ -10,5 +10,6 @@ namespace Tickets.Application.Entities
     {
         public int Id { get; set; }
         public Issue Issue { get; set; }
+        public string Details { get; set; }
     }
 }

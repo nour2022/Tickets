@@ -13,6 +13,8 @@ namespace Tickets.Application.Entities
         public int TickeIssueId { get; set; }
         public int PriorityId { get; set; }
         public int StateId { get; set; }
+        public Client Client { get; set; }
+      
 
     }
 }

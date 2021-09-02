@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tickets.Application.Entities
 {
-    class FullAuditedEntityBase<TKey>
+   public class FullAuditedEntityBase<TKey>
     {
         public TKey Id { get; set; }
         public string CreatedBy { get; set; }

@@ -5,9 +5,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Entities\UserEntity\**" />
+    <EmbeddedResource Remove="Entities\UserEntity\**" />
+    <None Remove="Entities\UserEntity\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Entities\UserEntity\Client.cs" />
+    <Compile Include="Entities\UserEntity\User.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="DTOs\" />
     <Folder Include="Validation\" />
     <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
