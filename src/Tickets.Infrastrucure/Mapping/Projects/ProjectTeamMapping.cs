@@ -6,14 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tickets.Application.Projects.Entities;
+using Tickets.Infrastrucure.Helpers;
 
 namespace Tickets.Infrastrucure.Mapping.Projects
 {
-    class ProjectTeamMapping : IEntityTypeConfiguration<ProjectTeam>
+    class ProjectTeamMapping : EntityTypeConfiguration<ProjectTeam>
     {
        
 
-            public void Configure(EntityTypeBuilder<ProjectTeam> entity)
+            public override void Configure(EntityTypeBuilder<ProjectTeam> entity)
             {
                 entity.ToTable("ProjectTeam", "project_teams");
                 entity.HasKey(e => e.Id);

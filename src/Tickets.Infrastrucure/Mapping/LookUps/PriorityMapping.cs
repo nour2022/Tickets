@@ -6,13 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tickets.Application.Lookups.Entities;
+using Tickets.Infrastrucure.Helpers;
 
 namespace Tickets.Infrastrucure.Mapping.LookUps
 {
-    class PriorityMapping : IEntityTypeConfiguration<Priority>
+    class PriorityMapping : EntityTypeConfiguration<Priority>
     {
 
-        public void Configure(EntityTypeBuilder<Priority> entity)
+        public override void Configure(EntityTypeBuilder<Priority> entity)
         {
             entity.ToTable("Priority", "lookups");
             entity.HasKey(e => e.Id);
