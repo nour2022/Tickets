@@ -2,14 +2,15 @@
 using Tickets.Application;
 using Tickets.Application.Projects.Entities;
 using Microsoft.EntityFrameworkCore;
+using Tickets.Infrastrucure.Helpers;
 
 namespace Tickets.Infrastrucure.Mapping.Projects
 {
 
-    public class ProjectMapping : IEntityTypeConfiguration<Project>
+    public class ProjectMapping : EntityTypeConfiguration<Project>
     {
 
-        public  void Configure(EntityTypeBuilder<Project> entity)
+        public override void Configure(EntityTypeBuilder<Project> entity)
         {
             entity.ToTable("Project", "projects");
             entity.HasKey(e => e.Id);

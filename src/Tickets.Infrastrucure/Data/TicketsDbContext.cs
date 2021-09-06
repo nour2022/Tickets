@@ -3,12 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Reflection;
+using Tickets.Application.Entities.UserEntity;
 using Tickets.Application.Tickets.Entities;
 using Tickets.Infrastrucure.Helpers;
 
 namespace Tickets.Infrastrucure.Data
 {
-    public class TicketsDbContext: IdentityDbContext
+    public class TicketsDbContext : IdentityDbContext<User, Role, int>
     {
         public TicketsDbContext(DbContextOptions<TicketsDbContext> options) : base(options)
         {
@@ -16,12 +17,10 @@ namespace Tickets.Infrastrucure.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Debugger.Launch();
-
             //dynamically load all entity and query type configurations
             var typeConfigurations = Assembly.GetExecutingAssembly().GetTypes().Where(type =>
                 (type.BaseType?.IsGenericType ?? false)
-                && (type.BaseType.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>)));
+                && (type.BaseType.GetGenericTypeDefinition() == typeof(EntityTypeConfiguration<>)));
 
             foreach (var typeConfiguration in typeConfigurations)
             {

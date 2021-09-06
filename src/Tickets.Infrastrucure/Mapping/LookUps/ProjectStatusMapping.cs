@@ -6,13 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tickets.Application.Lookups.Entities;
+using Tickets.Infrastrucure.Helpers;
 
 namespace Tickets.Infrastrucure.Mapping.LookUps
 {
-    class ProjetStatusMapping : IEntityTypeConfiguration<ProjectStatus>
+    class ProjetStatusMapping : EntityTypeConfiguration<ProjectStatus>
     {
      
-        public void Configure(EntityTypeBuilder<ProjectStatus> entity)
+        public override void Configure(EntityTypeBuilder<ProjectStatus> entity)
         {
             entity.ToTable("ProjetStatus", "lookups");
             entity.HasKey(e => e.Id);

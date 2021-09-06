@@ -6,11 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tickets.Application.Tickets.Entities;
+using Tickets.Infrastrucure.Helpers;
+
 namespace Tickets.Infrastrucure.Mapping.Tickets
 {
-    class TicketMapping : IEntityTypeConfiguration<Ticket>
+    class TicketMapping : EntityTypeConfiguration<Ticket>
     {
-        public void Configure(EntityTypeBuilder<Ticket> entity)
+        public override void Configure(EntityTypeBuilder<Ticket> entity)
         {
             entity.ToTable("Ticket", "tickets");
             entity.HasKey(e => e.Id);

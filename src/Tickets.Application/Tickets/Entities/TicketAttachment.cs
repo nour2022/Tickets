@@ -7,7 +7,7 @@ using Tickets.Application.Entities;
 
 namespace Tickets.Application.Tickets.Entities
 {
-   public class TicketAttachment
+   public class TicketAttachment:EntityBase
     {
         public int TicketId { get; set; }
         public Ticket Ticket { get; set; }
