@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tickets.Application.Lookups.Entities;
 
 namespace Tickets.Application.Projects.Entities
 {
-    class ProjectTeam
+   public class ProjectTeam : EntityBase<int>
     {
-        public int ProjectId { get; set; }
+       
+        public Project Project { get; set; }
         public int UserId { get; set; }
-        public int JobTitleId { get; set; }
+        public Guid RoleId { get; set; }
+        public int ProjectId { get; set; }
     }
 }

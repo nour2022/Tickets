@@ -4,11 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tickets.Application.Entities
+using Tickets.Application.Tickets.Entities;
+
+namespace Tickets.Application.Lookups.Entities
 {
-    class Priority
+    public class Priority:EntityBase<int>
     {
-        public int Id { get; set; }
-        public PriorityType Type { get; set; }
+      
+        public string Type { get; set; }
+        public List<Ticket> Tickets { get; set; }
+      
+      
     }
 }

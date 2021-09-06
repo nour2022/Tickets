@@ -7,9 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{57DAF039-427
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tickets.Web", "src\Tickets.Web\Tickets.Web.csproj", "{D2FE5100-2D5B-48AA-8277-79CC6F1F4E68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tickets.Application", "src\Tickets.Application\Tickets.Application.csproj", "{AE98A6E7-E154-43F6-BCFE-CA4B2776A0AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tickets.Application", "src\Tickets.Application\Tickets.Application.csproj", "{AE98A6E7-E154-43F6-BCFE-CA4B2776A0AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tickets.Infrastrucure", "src\Tickets.Infrastrucure\Tickets.Infrastrucure.csproj", "{18835D48-244F-4D8D-80D6-CAA5B3397158}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tickets.Infrastrucure", "src\Tickets.Infrastrucure\Tickets.Infrastrucure.csproj", "{18835D48-244F-4D8D-80D6-CAA5B3397158}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

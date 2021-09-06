@@ -1,4 +1,4 @@
-﻿namespace Tickets.Application
+﻿namespace Tickets.Application.Entities
 {
     enum PriorityType
     {
@@ -32,7 +32,9 @@
     {
         Manager,
         TeamLeader,
-        Devoleper
+        Devoleper,
+        Tester,
+        Client
 
     }
 }
