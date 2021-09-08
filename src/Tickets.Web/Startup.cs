@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Tickets.Application.Services;
 using Tickets.Infrastrucure.Data;
 
 namespace Tickets.Web
@@ -25,6 +26,10 @@ namespace Tickets.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<TicketsDbContext>(options=> options.UseSqlServer(Configuration.GetConnectionString("Tickets")));
+
+            services.AddScoped<ProjectAppService>();
+            services.AddScoped<ProjectAppService>();
+
             services.AddRazorPages();
         }
 

@@ -12,29 +12,15 @@ namespace Tickets.Web.Pages.Projects
 {
     public class IndexModel : PageModel
     {
-       //private ProjectAppService projectAppService;
-       // public IndexModel(ProjectAppService projectAppService)
-       // {
-       //     this.projectAppService = projectAppService;
-       // }
+        private ProjectAppService _projectAppService;
+        public IndexModel(ProjectAppService projectAppService)
+        {
+            _projectAppService = projectAppService;
+        }
         public List<Project> projects { get; set; }
         public void OnGet()
         {
-           projects = new List<Project>()
-            {
-                new Project()
-                {
-                    Id = 1,
-                    ClientName = "Nour",
-                    TypeId = 1,
-                    CreatedBy = "hala",
-                    CreatedOn= DateTime.Today ,
-                    UpdatedBy = "Sokar",
-                    UpdatedOn = DateTime.Now,
-                    Title = "Development"
-
-                }
-            };
+            projects = _projectAppService.GetAll();
           
         }
     }

@@ -1,40 +1,44 @@
 ﻿@page
-@model Tickets.Domain.Projects.Entities.Project
+@model Tickets.Web.Pages.Projects.CreateModel
 @{
 }
+<div class="mx-auto" style="width:1100px;">
+    <h1>Create New Project</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create" enctype="multipart/form-data">
+                @if (ViewBag.Message != null)
+                {
+                    <h5 class="alert alert-danger">@ViewBag.Message</h5>
+                }
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<h1>Create Project #@Model.Id</h1>
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
-            @if (ViewBag.Message != null)
-            {
-                <h5 class="alert alert-danger">@ViewBag.Message</h5>
-            }
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="project.Title" class="control-label"></label>
+                    <input asp-for="project.Title" class="form-control" />
+                    <span asp-validation-for="project.Title" class="text-danger"></span>
+                </div>
+                <select asp-for="project.TypeId" asp-items="Html.GetEnumSelectList<StatusType>()">
+                    <option value=" ">Select Status</option>
 
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
+                </select>
+                <div class="form-group">
+                    <label asp-for="project.ClientName" class="control-label"></label>
+                    <input asp-for="project.ClientName" class="form-control" />
+                    <span asp-validation-for="project.ClientName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="project.CreatedBy" class="control-label"></label>
+                    <input asp-for="project.CreatedBy" class="form-control" />
+                    <span asp-validation-for="project.CreatedBy" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="ClientName" class="control-label"></label>
-                <input asp-for="ClientName" class="form-control" />
-                <span asp-validation-for="ClientName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedBy" class="control-label"></label>
-                <input asp-for="CreatedBy" class="form-control" />
-                <span asp-validation-for="CreatedBy" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-outline-dark">Back to List</a>
-            </div>
-        </form>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <a asp-page="Index" class="btn btn-outline-dark">Back to List</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
+</div>

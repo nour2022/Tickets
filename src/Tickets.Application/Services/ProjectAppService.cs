@@ -1,12 +1,18 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Tickets.Domain.Entities.UserEntity;
 using Tickets.Domain.Lookups.Entities;
 using Tickets.Domain.Projects.Entities;
 using Tickets.Infrastrucure.Data;
 
 namespace Tickets.Application.Services
 {
-    public class ProjectAppService 
+    public class ProjectAppService : IAppService<Project>
     {
         private TicketsDbContext DbContext;
 
@@ -16,13 +22,21 @@ namespace Tickets.Application.Services
         }
         public void Insert(Project project)
         {
-            // project.CreatedBy = 
+         //  // var currentUser = DbContext.Users.Find(ClaimTypes.Name);
+         ////   project.CreatedBy = currentUser.FullName;
             project.CreatedOn = DateTime.Now;
-            //  var projectStatus = DbContext.ProjectStatus.FirstOrDefault(s => s.Status == project.ProjectType);
-            //  project.TypeId = projectStatus.Id;
+
+            project.ProjectType = GetProjectStatus(project.TypeId);
             project.Tickets = null;
-            DbContext.projects.Add(project);
-          
+
+            DbContext.Projects.Add(project);
+
+        }
+        public ProjectStatus GetProjectStatus(int id)
+        {
+
+            var status = DbContext.projectStatus.Find(id);
+            return status;
         }
         public bool Commit()
         {
@@ -31,35 +45,48 @@ namespace Tickets.Application.Services
             else
                 return false;
         }
-        public void Delete(int id)
+        public bool Delete(int id)
         {
 
-            throw new NotImplementedException();
+            var project = GetById(id);
+            return Delete(project);
         }
-        public void Delete(Project project)
+        public bool Delete(Project project)
         {
+            if (project.Tickets != null)
+                return false;
+            else
+            {
+                DbContext.Projects.Remove(project);
 
+            }
+            return true;
         }
         public Project GetById(int id)
         {
 
-            throw new NotImplementedException();
+            return DbContext.Projects.FirstOrDefault(p => p.Id == id);
         }
-        
+
         public List<Project> GetAll()
         {
-
-            throw new NotImplementedException();
+            return DbContext.Projects.ToList();
         }
-        public void Update(Project project)
+        public void Update(Project updatedProject)
         {
-
-            throw new NotImplementedException();
+            var project = GetById(updatedProject.Id);
+            project.TypeId = updatedProject.TypeId;
+            project.ClientName = updatedProject.ClientName;
+            project.Title = updatedProject.Title;
+            project.ProjectType = GetProjectStatus(project.TypeId);
+            project.UpdatedOn = DateTime.Now;
+            DbContext.Update(project);
         }
         public void Update(int id)
         {
 
-            throw new NotImplementedException();
+           var project = GetById(id);
+            Update(project);
         }
     }
 }

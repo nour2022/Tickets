@@ -1,68 +1,72 @@
 ﻿@page
-@model Tickets.Domain.Projects.Entities.Project
+@model Tickets.Web.Pages.Projects.DetailsModel
 @{
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>Project #@Model.Id</h4>
+
+<div class="mx-auto" style="width:1100px;">
+    <h1>Details</h1>
+    <h4>Project #@Model.Project.Id</h4>
     <hr />
     <dl class="row">
 
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.Project.Title)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Title)
+            @Html.DisplayFor(model => model.Project.Title)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ProjectType)
+
+            @Html.DisplayNameFor(model => model.Project.TypeId)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ProjectType)
+           
+            @Model._projectAppService.GetProjectStatus(Model.Project.TypeId).Status
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ClientName)
+            @Html.DisplayNameFor(model => model.Project.ClientName)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ClientName)
+            @Html.DisplayFor(model => model.Project.ClientName)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedOn)
+            @Html.DisplayNameFor(model => model.Project.CreatedOn)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CreatedOn)
+            @Html.DisplayFor(model => model.Project.CreatedOn)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedBy)
+            @Html.DisplayNameFor(model => model.Project.CreatedBy)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CreatedBy)
+            @Html.DisplayFor(model => model.Project.CreatedBy)
         </dd>
-        @if (Model.UpdatedBy != null)
+        @if (Model.Project.UpdatedBy != null)
         {
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.UpdatedBy)
+                @Html.DisplayNameFor(model => model.Project.UpdatedBy)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.UpdatedBy)
+                @Html.DisplayFor(model => model.Project.UpdatedBy)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.UpdatedOn)
+                @Html.DisplayNameFor(model => model.Project.UpdatedOn)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.UpdatedOn)
+                @Html.DisplayFor(model => model.Project.UpdatedOn)
             </dd>
 
         }
 
 
     </dl>
-</div>
-<div>
+    <div>
 
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+        <a asp-page="Edit" asp-route-id="@Model.Project.Id" class="btn btn-primary">Edit</a>
 
-    <a asp-action="Index" class="btn btn-outline-dark">Back to List</a>
+        <a asp-page="Index" class="btn btn-outline-dark">Back to List</a>
+    </div>
+
 </div>
