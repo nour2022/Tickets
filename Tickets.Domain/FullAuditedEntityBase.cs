@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tickets.Application
+namespace Tickets.Domain
 {
-   
+
     [Serializable]
-    public abstract class EntityBase 
+    public abstract class EntityBase
     {
 
     }
@@ -19,7 +19,7 @@ namespace Tickets.Application
         public TKey Id { get; set; }
     }
 
-    public class FullAuditedEntityBase<TKey>:EntityBase
+    public class FullAuditedEntityBase<TKey> : EntityBase
     {
         public TKey Id { get; set; }
         public string CreatedBy { get; set; }

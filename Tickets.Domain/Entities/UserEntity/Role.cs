@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tickets.Application.Entities.UserEntity
+namespace Tickets.Domain.Entities.UserEntity
 {
-   public class Role:IdentityRole<int>
+    public class Role : IdentityRole<int>
     {
 
     }

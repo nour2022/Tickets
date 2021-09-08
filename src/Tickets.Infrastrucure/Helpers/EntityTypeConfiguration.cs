@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Tickets.Application;
+using Tickets.Domain;
 
 namespace Tickets.Infrastrucure.Helpers
 {

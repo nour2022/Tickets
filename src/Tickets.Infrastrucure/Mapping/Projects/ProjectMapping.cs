@@ -1,7 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Tickets.Application;
-using Tickets.Application.Projects.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Tickets.Domain.Projects.Entities;
 using Tickets.Infrastrucure.Helpers;
 
 namespace Tickets.Infrastrucure.Mapping.Projects

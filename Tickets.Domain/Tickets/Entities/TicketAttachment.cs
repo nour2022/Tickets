@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tickets.Application.Entities;
+using Tickets.Domain;
+using Tickets.Domain.Entities;
 
-namespace Tickets.Application.Tickets.Entities
+namespace Tickets.Domain.Tickets.Entities
 {
-   public class TicketAttachment:EntityBase
+    public class TicketAttachment : EntityBase
     {
         public int TicketId { get; set; }
         public Ticket Ticket { get; set; }

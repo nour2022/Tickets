@@ -1,20 +1,25 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Reflection;
-using Tickets.Application.Entities.UserEntity;
-using Tickets.Application.Tickets.Entities;
+using Tickets.Domain.Entities.UserEntity;
+using Tickets.Domain.Projects.Entities;
 using Tickets.Infrastrucure.Helpers;
 
 namespace Tickets.Infrastrucure.Data
 {
     public class TicketsDbContext : IdentityDbContext<User, Role, int>
     {
+        public DbSet<Project> projects  { get; set; }
+       
         public TicketsDbContext(DbContextOptions<TicketsDbContext> options) : base(options)
         {
-
+           
         }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //dynamically load all entity and query type configurations
@@ -30,6 +35,5 @@ namespace Tickets.Infrastrucure.Data
 
             base.OnModelCreating(modelBuilder);
         }
-
     }
 }

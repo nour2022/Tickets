@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tickets.Application.Entities.UserEntity
+namespace Tickets.Domain.Entities.UserEntity
 {
     public class User : IdentityUser<int>
     {

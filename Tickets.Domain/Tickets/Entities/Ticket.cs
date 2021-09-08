@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tickets.Application.Entities.UserEntity;
-using Tickets.Application.Lookups.Entities;
-using Tickets.Application.Projects.Entities;
+﻿using System.Collections.Generic;
+using Tickets.Domain.Lookups.Entities;
+using Tickets.Domain.Projects.Entities;
 
-namespace Tickets.Application.Tickets.Entities
+namespace Tickets.Domain.Tickets.Entities
 {
     public class Ticket : FullAuditedEntityBase<int>
     {
@@ -19,7 +14,7 @@ namespace Tickets.Application.Tickets.Entities
         public Priority Priority { get; set; }
         public int StateId { get; set; }
         public TicketState State { get; set; }
-       
+
         public int ProjectId { get; set; }
         public Project Project { get; set; }
         public List<TicketAttachment> TicketAttachment { get; set; }

@@ -5,17 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Entities\UserEntity\**" />
-    <EmbeddedResource Remove="Entities\UserEntity\**" />
-    <None Remove="Entities\UserEntity\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Entities\UserEntity\Role.cs" />
-    <Compile Include="Entities\UserEntity\User.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="DTOs\" />
     <Folder Include="Validation\" />
     <Folder Include="Services\" />
@@ -32,6 +21,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="5.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Tickets.Domain\Tickets.Domain.csproj" />
+    <ProjectReference Include="..\Tickets.Infrastrucure\Tickets.Infrastrucure.csproj" />
   </ItemGroup>
 
 </Project>

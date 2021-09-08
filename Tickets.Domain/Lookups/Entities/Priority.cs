@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tickets.Application.Tickets.Entities;
+using Tickets.Domain;
+using Tickets.Domain.Tickets.Entities;
 
-namespace Tickets.Application.Lookups.Entities
+namespace Tickets.Domain.Lookups.Entities
 {
-    public class TicketType : EntityBase<int>
+    public class Priority : EntityBase<int>
     {
-      
+
         public string Type { get; set; }
         public List<Ticket> Tickets { get; set; }
+
+
     }
 }
