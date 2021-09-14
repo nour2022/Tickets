@@ -28,8 +28,9 @@ namespace Tickets.Web
             services.AddDbContext<TicketsDbContext>(options=> options.UseSqlServer(Configuration.GetConnectionString("Tickets")));
 
             services.AddScoped<ProjectAppService>();
-            services.AddScoped<ProjectAppService>();
-
+            services.AddScoped<TicketAppService>();
+            services.AddScoped<TicketAttachmentAppService>();
+    //        services.AddScoped<AttachmentAppService>();
             services.AddRazorPages();
         }
 

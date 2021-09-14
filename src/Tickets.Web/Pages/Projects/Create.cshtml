@@ -18,7 +18,7 @@
                     <input asp-for="project.Title" class="form-control" />
                     <span asp-validation-for="project.Title" class="text-danger"></span>
                 </div>
-                <select asp-for="project.TypeId" asp-items="Html.GetEnumSelectList<StatusType>()">
+                <select asp-for="project.TypeId" asp-items="Html.GetEnumSelectList<Tickets.Domain.Entities.StatusType>()">
                     <option value=" ">Select Status</option>
 
                 </select>

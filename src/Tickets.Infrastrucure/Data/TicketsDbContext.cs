@@ -18,9 +18,12 @@ namespace Tickets.Infrastrucure.Data
         public DbSet<Project> Projects  { get; set; }
         public DbSet<ProjectTeam> ProjectTeams { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
-        public DbSet<Attachment> Attachments { get; set; }
+        public DbSet<Attachment> Attachment { get; set; }
         public DbSet<TicketAttachment> TicketAttachments { get; set; }
         public DbSet<ProjectStatus> projectStatus{ get; set; }
+        public DbSet<Priority> Priority { get; set; }
+        public DbSet<TicketState> TicketStates { get; set; }
+        public DbSet<TicketType> TicketTypes { get; set; }
         public TicketsDbContext(DbContextOptions<TicketsDbContext> options) : base(options)
         {
            

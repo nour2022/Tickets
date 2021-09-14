@@ -27,7 +27,6 @@ namespace Tickets.Infrastrucure.Mapping.Tickets
             entity.HasOne(e => e.Type).WithMany(e => e.Tickets).HasForeignKey(e => e.TickeTypeId);
              entity.HasOne(e => e.State).WithMany(e => e.Tickets).HasForeignKey(e => e.StateId);
             entity.HasOne(e => e.Project).WithMany(e => e.Tickets).HasForeignKey(e => e.ProjectId);
-            entity.HasMany(e => e.TicketAttachment).WithOne(e => e.Ticket).HasForeignKey(e => e.AttachmentId);
 
         }
     }

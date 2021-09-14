@@ -22,11 +22,11 @@
                     <input asp-for="Project.ClientName" class="form-control" />
                     <span asp-validation-for="Project.ClientName" class="text-danger"></span>
                 </div>
-                <select asp-for="Project.TypeId" asp-items="Html.GetEnumSelectList<StatusType>()">
+                <select asp-for="Project.TypeId" asp-items="Html.GetEnumSelectList<Tickets.Domain.Entities.StatusType>()">
                     <option value=" ">Select Status</option>
                 </select>
                 <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <input type="submit" value="Save" class="btn btn-primary" asp-route-id="@Model.Project.Id" />
                     <a asp-page="Index" class="btn btn-outline-dark">Back to List</a>
                 </div>
             </form>

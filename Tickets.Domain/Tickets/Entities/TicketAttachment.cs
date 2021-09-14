@@ -10,6 +10,7 @@ namespace Tickets.Domain.Tickets.Entities
 {
     public class TicketAttachment : EntityBase
     {
+      
         public int TicketId { get; set; }
         public Ticket Ticket { get; set; }
         public int AttachmentId { get; set; }

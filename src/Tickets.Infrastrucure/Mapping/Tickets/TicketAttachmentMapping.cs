@@ -10,7 +10,8 @@ namespace Tickets.Infrastrucure.Mapping.Tickets
         public override void Configure(EntityTypeBuilder<TicketAttachment> entity)
         {
             entity.ToTable("TicketAttachment", "tickets");
-            entity.HasKey(a => new {a.TicketId, a.AttachmentId});
+            entity.HasKey(e => new { e.AttachmentId, e.TicketId });
+         
 
         }
     }

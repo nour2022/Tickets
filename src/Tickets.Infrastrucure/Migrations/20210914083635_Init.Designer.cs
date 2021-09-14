@@ -10,8 +10,8 @@ using Tickets.Infrastrucure.Data;
 namespace Tickets.Infrastrucure.Migrations
 {
     [DbContext(typeof(TicketsDbContext))]
-    [Migration("20210906130429_InitDb")]
-    partial class InitDb
+    [Migration("20210914083635_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -122,7 +122,7 @@ namespace Tickets.Infrastrucure.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Tickets.Application.Entities.Attachment", b =>
+            modelBuilder.Entity("Tickets.Domain.Entities.Attachment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -158,7 +158,7 @@ namespace Tickets.Infrastrucure.Migrations
                     b.ToTable("Attachment");
                 });
 
-            modelBuilder.Entity("Tickets.Application.Entities.UserEntity.Role", b =>
+            modelBuilder.Entity("Tickets.Domain.Entities.UserEntity.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -187,7 +187,7 @@ namespace Tickets.Infrastrucure.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("Tickets.Application.Entities.UserEntity.User", b =>
+            modelBuilder.Entity("Tickets.Domain.Entities.UserEntity.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -260,7 +260,7 @@ namespace Tickets.Infrastrucure.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Tickets.Application.Lookups.Entities.Priority", b =>
+            modelBuilder.Entity("Tickets.Domain.Lookups.Entities.Priority", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -277,7 +277,7 @@ namespace Tickets.Infrastrucure.Migrations
                     b.ToTable("Priority", "lookups");
                 });
 
-            modelBuilder.Entity("Tickets.Application.Lookups.Entities.ProjectStatus", b =>
+            modelBuilder.Entity("Tickets.Domain.Lookups.Entities.ProjectStatus", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -294,7 +294,7 @@ namespace Tickets.Infrastrucure.Migrations
                     b.ToTable("ProjetStatus", "lookups");
                 });
 
-            modelBuilder.Entity("Tickets.Application.Lookups.Entities.TicketState", b =>
+            modelBuilder.Entity("Tickets.Domain.Lookups.Entities.TicketState", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -311,7 +311,7 @@ namespace Tickets.Infrastrucure.Migrations
                     b.ToTable("TicketState", "lookups");
                 });
 
-            modelBuilder.Entity("Tickets.Application.Lookups.Entities.TicketType", b =>
+            modelBuilder.Entity("Tickets.Domain.Lookups.Entities.TicketType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -328,7 +328,7 @@ namespace Tickets.Infrastrucure.Migrations
                     b.ToTable("TicketType", "lookups");
                 });
 
-            modelBuilder.Entity("Tickets.Application.Projects.Entities.Project", b =>
+            modelBuilder.Entity("Tickets.Domain.Projects.Entities.Project", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -371,7 +371,7 @@ namespace Tickets.Infrastrucure.Migrations
                     b.ToTable("Project", "projects");
                 });
 
-            modelBuilder.Entity("Tickets.Application.Projects.Entities.ProjectTeam", b =>
+            modelBuilder.Entity("Tickets.Domain.Projects.Entities.ProjectTeam", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -394,7 +394,7 @@ namespace Tickets.Infrastrucure.Migrations
                     b.ToTable("ProjectTeam", "project_teams");
                 });
 
-            modelBuilder.Entity("Tickets.Application.Tickets.Entities.Ticket", b =>
+            modelBuilder.Entity("Tickets.Domain.Tickets.Entities.Ticket", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -448,29 +448,24 @@ namespace Tickets.Infrastrucure.Migrations
                     b.ToTable("Ticket", "tickets");
                 });
 
-            modelBuilder.Entity("Tickets.Application.Tickets.Entities.TicketAttachment", b =>
+            modelBuilder.Entity("Tickets.Domain.Tickets.Entities.TicketAttachment", b =>
                 {
-                    b.Property<int>("TicketId")
-                        .HasColumnType("int");
-
                     b.Property<int>("AttachmentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("AttachmentId1")
+                    b.Property<int>("TicketId")
                         .HasColumnType("int");
 
-                    b.HasKey("TicketId", "AttachmentId");
+                    b.HasKey("AttachmentId", "TicketId");
 
-                    b.HasIndex("AttachmentId");
-
-                    b.HasIndex("AttachmentId1");
+                    b.HasIndex("TicketId");
 
                     b.ToTable("TicketAttachment", "tickets");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("Tickets.Application.Entities.UserEntity.Role", null)
+                    b.HasOne("Tickets.Domain.Entities.UserEntity.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -479,7 +474,7 @@ namespace Tickets.Infrastrucure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("Tickets.Application.Entities.UserEntity.User", null)
+                    b.HasOne("Tickets.Domain.Entities.UserEntity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -488,7 +483,7 @@ namespace Tickets.Infrastrucure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("Tickets.Application.Entities.UserEntity.User", null)
+                    b.HasOne("Tickets.Domain.Entities.UserEntity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -497,13 +492,13 @@ namespace Tickets.Infrastrucure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
-                    b.HasOne("Tickets.Application.Entities.UserEntity.Role", null)
+                    b.HasOne("Tickets.Domain.Entities.UserEntity.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Tickets.Application.Entities.UserEntity.User", null)
+                    b.HasOne("Tickets.Domain.Entities.UserEntity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -512,25 +507,25 @@ namespace Tickets.Infrastrucure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("Tickets.Application.Entities.UserEntity.User", null)
+                    b.HasOne("Tickets.Domain.Entities.UserEntity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Tickets.Application.Projects.Entities.Project", b =>
+            modelBuilder.Entity("Tickets.Domain.Projects.Entities.Project", b =>
                 {
-                    b.HasOne("Tickets.Application.Lookups.Entities.ProjectStatus", "ProjectType")
+                    b.HasOne("Tickets.Domain.Lookups.Entities.ProjectStatus", "ProjectType")
                         .WithMany("Projects")
                         .HasForeignKey("ProjectTypeId");
 
                     b.Navigation("ProjectType");
                 });
 
-            modelBuilder.Entity("Tickets.Application.Projects.Entities.ProjectTeam", b =>
+            modelBuilder.Entity("Tickets.Domain.Projects.Entities.ProjectTeam", b =>
                 {
-                    b.HasOne("Tickets.Application.Projects.Entities.Project", "Project")
+                    b.HasOne("Tickets.Domain.Projects.Entities.Project", "Project")
                         .WithMany("ProjectTeams")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -539,27 +534,27 @@ namespace Tickets.Infrastrucure.Migrations
                     b.Navigation("Project");
                 });
 
-            modelBuilder.Entity("Tickets.Application.Tickets.Entities.Ticket", b =>
+            modelBuilder.Entity("Tickets.Domain.Tickets.Entities.Ticket", b =>
                 {
-                    b.HasOne("Tickets.Application.Lookups.Entities.Priority", "Priority")
+                    b.HasOne("Tickets.Domain.Lookups.Entities.Priority", "Priority")
                         .WithMany("Tickets")
                         .HasForeignKey("PriorityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Tickets.Application.Projects.Entities.Project", "Project")
+                    b.HasOne("Tickets.Domain.Projects.Entities.Project", "Project")
                         .WithMany("Tickets")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Tickets.Application.Lookups.Entities.TicketState", "State")
+                    b.HasOne("Tickets.Domain.Lookups.Entities.TicketState", "State")
                         .WithMany("Tickets")
                         .HasForeignKey("StateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Tickets.Application.Lookups.Entities.TicketType", "Type")
+                    b.HasOne("Tickets.Domain.Lookups.Entities.TicketType", "Type")
                         .WithMany("Tickets")
                         .HasForeignKey("TickeTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -574,17 +569,17 @@ namespace Tickets.Infrastrucure.Migrations
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("Tickets.Application.Tickets.Entities.TicketAttachment", b =>
+            modelBuilder.Entity("Tickets.Domain.Tickets.Entities.TicketAttachment", b =>
                 {
-                    b.HasOne("Tickets.Application.Tickets.Entities.Ticket", "Ticket")
-                        .WithMany("TicketAttachment")
+                    b.HasOne("Tickets.Domain.Entities.Attachment", "Attachment")
+                        .WithMany()
                         .HasForeignKey("AttachmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Tickets.Application.Entities.Attachment", "Attachment")
-                        .WithMany()
-                        .HasForeignKey("AttachmentId1")
+                    b.HasOne("Tickets.Domain.Tickets.Entities.Ticket", "Ticket")
+                        .WithMany("TicketAttachment")
+                        .HasForeignKey("TicketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -593,34 +588,34 @@ namespace Tickets.Infrastrucure.Migrations
                     b.Navigation("Ticket");
                 });
 
-            modelBuilder.Entity("Tickets.Application.Lookups.Entities.Priority", b =>
+            modelBuilder.Entity("Tickets.Domain.Lookups.Entities.Priority", b =>
                 {
                     b.Navigation("Tickets");
                 });
 
-            modelBuilder.Entity("Tickets.Application.Lookups.Entities.ProjectStatus", b =>
+            modelBuilder.Entity("Tickets.Domain.Lookups.Entities.ProjectStatus", b =>
                 {
                     b.Navigation("Projects");
                 });
 
-            modelBuilder.Entity("Tickets.Application.Lookups.Entities.TicketState", b =>
+            modelBuilder.Entity("Tickets.Domain.Lookups.Entities.TicketState", b =>
                 {
                     b.Navigation("Tickets");
                 });
 
-            modelBuilder.Entity("Tickets.Application.Lookups.Entities.TicketType", b =>
+            modelBuilder.Entity("Tickets.Domain.Lookups.Entities.TicketType", b =>
                 {
                     b.Navigation("Tickets");
                 });
 
-            modelBuilder.Entity("Tickets.Application.Projects.Entities.Project", b =>
+            modelBuilder.Entity("Tickets.Domain.Projects.Entities.Project", b =>
                 {
                     b.Navigation("ProjectTeams");
 
                     b.Navigation("Tickets");
                 });
 
-            modelBuilder.Entity("Tickets.Application.Tickets.Entities.Ticket", b =>
+            modelBuilder.Entity("Tickets.Domain.Tickets.Entities.Ticket", b =>
                 {
                     b.Navigation("TicketAttachment");
                 });

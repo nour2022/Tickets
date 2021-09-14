@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Tickets.Infrastrucure.Migrations
 {
-    public partial class InitDb : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -352,21 +352,20 @@ namespace Tickets.Infrastrucure.Migrations
                 columns: table => new
                 {
                     TicketId = table.Column<int>(type: "int", nullable: false),
-                    AttachmentId = table.Column<int>(type: "int", nullable: false),
-                    AttachmentId1 = table.Column<int>(type: "int", nullable: false)
+                    AttachmentId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TicketAttachment", x => new { x.TicketId, x.AttachmentId });
+                    table.PrimaryKey("PK_TicketAttachment", x => new { x.AttachmentId, x.TicketId });
                     table.ForeignKey(
-                        name: "FK_TicketAttachment_Attachment_AttachmentId1",
-                        column: x => x.AttachmentId1,
+                        name: "FK_TicketAttachment_Attachment_AttachmentId",
+                        column: x => x.AttachmentId,
                         principalTable: "Attachment",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TicketAttachment_Ticket_AttachmentId",
-                        column: x => x.AttachmentId,
+                        name: "FK_TicketAttachment_Ticket_TicketId",
+                        column: x => x.TicketId,
                         principalSchema: "tickets",
                         principalTable: "Ticket",
                         principalColumn: "Id",
@@ -449,16 +448,10 @@ namespace Tickets.Infrastrucure.Migrations
                 column: "TickeTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TicketAttachment_AttachmentId",
+                name: "IX_TicketAttachment_TicketId",
                 schema: "tickets",
                 table: "TicketAttachment",
-                column: "AttachmentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TicketAttachment_AttachmentId1",
-                schema: "tickets",
-                table: "TicketAttachment",
-                column: "AttachmentId1");
+                column: "TicketId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

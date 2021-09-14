@@ -1,34 +1,52 @@
-﻿namespace Tickets.Application.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Tickets.Domain.Entities
 {
-    enum PriorityType
+    public enum PriorityType
     {
-        Critical,
+
+        [Display(Name = "Critical")]
+        Critical = 1,
+        [Display(Name = "High")]
         High,
+        [Display(Name = "Medium")]
         Medium,
+        [Display(Name = "Low")]
         Low
     }
-    enum Issue
+    public enum Issue
     {
-        Bug,
+        [Display(Name = "Bug")]
+        Bug = 1,
+        [Display(Name = "Unhandled Exception")]
         UnhandledException,
+        [Display(Name = " Interface Issue")]
         Interface_Issue
 
     }
-    enum StateType
+    public enum StateType
     {
-        New,
+        [Display(Name = "New")]
+        New = 1,
+        [Display(Name = "Pending")]
         Pending,
+        [Display(Name = "Open")]
         Open,
+        [Display(Name = "Closed")]
         Closed
     }
-    enum StatusType
+    public enum StatusType
     {
-        Not_Started,
-        In_Progress,
-        Finished,
-        Cancelled
+        [Display(Name = "Not Started")]
+        Not_Started = 1,
+        [Display(Name = "In progress")]
+        In_Progress = 2,
+        [Display(Name = "Finished")]
+        Finished = 3,
+        [Display(Name = "Cancelled")]
+        Cancelled = 4
     }
-    enum Title
+    public enum Title
     {
         Manager,
         TeamLeader,

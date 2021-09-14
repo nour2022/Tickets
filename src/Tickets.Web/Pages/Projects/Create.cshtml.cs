@@ -1,25 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Tickets.Application.Services;
+using Tickets.Domain.Entities;
 using Tickets.Domain.Projects.Entities;
-using Tickets.Infrastrucure.Data;
 
 namespace Tickets.Web.Pages.Projects
 {
-   public enum StatusType
-    {
-        [Display(Name = "Not Started")]
-        Not_Started = 1,
-        [Display(Name = "In progress")]
-        In_Progress = 2,
-        [Display(Name = "Finished")]
-        Finished = 3,
-        [Display(Name = "Cancelled")]
-        Cancelled = 4
-            
-    }
+
     public class CreateModel : PageModel
     {
         private ProjectAppService _projectAppService;

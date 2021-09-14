@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Tickets.Application.Services;
+using Tickets.Domain.Entities;
 using Tickets.Domain.Projects.Entities;
 
 namespace Tickets.Web.Pages.Projects
@@ -24,10 +21,10 @@ namespace Tickets.Web.Pages.Projects
         {
             Project = _projectAppService.GetById(id);
         }
-        public void OnPost()
+        public void OnPost(int id)
         {
 
-            _projectAppService.Update(Project);
+            _projectAppService.Update(Project, id);
             _projectAppService.Commit();
         }
     }

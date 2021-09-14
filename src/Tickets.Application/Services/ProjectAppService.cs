@@ -72,21 +72,24 @@ namespace Tickets.Application.Services
         {
             return DbContext.Projects.ToList();
         }
-        public void Update(Project updatedProject)
+        public void Update(Project updatedProject,int id)
         {
-            var project = GetById(updatedProject.Id);
-            project.TypeId = updatedProject.TypeId;
+            var project = new Project();
+            project = GetById(id);
+        
             project.ClientName = updatedProject.ClientName;
             project.Title = updatedProject.Title;
-            project.ProjectType = GetProjectStatus(project.TypeId);
+            project.ProjectType = GetProjectStatus(updatedProject.TypeId);
+            project.TypeId = updatedProject.TypeId;
             project.UpdatedOn = DateTime.Now;
+            project.UpdatedBy = " /0";
             DbContext.Update(project);
         }
         public void Update(int id)
         {
 
            var project = GetById(id);
-            Update(project);
+            Update(project,id);
         }
     }
 }

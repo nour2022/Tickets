@@ -13,6 +13,6 @@ namespace Tickets.Application.Services
         TEntity GetById(int id);
         void Insert(TEntity entity);
         void Update(int id);
-        void Update(TEntity entity);
+        void Update(TEntity entity,int id);
     }
 }
