@@ -29,7 +29,8 @@ namespace Tickets.Application.Services
 
         public bool Delete(TicketAttachment entity)
         {
-            throw new NotImplementedException();
+            DbContext.TicketAttachments.Remove(entity);
+            return true;
         }
 
         public List<TicketAttachment> GetAll()

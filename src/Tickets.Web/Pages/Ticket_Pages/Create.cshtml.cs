@@ -89,7 +89,7 @@ namespace Tickets.Web.Pages.Ticket_Pages
             string fileName = File.FileName;
             string fullPath = Path.Combine(upload, fileName);
           File.CopyTo(new FileStream(fullPath, FileMode.Create));
-            return fileName;
+            return fullPath;
         }
     }
 }

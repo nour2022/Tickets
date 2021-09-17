@@ -52,25 +52,6 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Ticket.Project.Title)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Ticket.TicketAttachment)
-        </dt>
-        @if (Model.Attachments != null)
-        {
-            foreach (var attachment in Model.Attachments)
-            {
-            <dd class="col-sm-10">
-               
-                <img width="250" height="200" src="~/Ref/@attachment.Path" />
-            </dd>
-            }
-        }
-        else
-        {
-            <dd class="col-sm-10">
-                No Attachment Found!
-            </dd>
-        }
 
 
         <dt class="col-sm-2">
@@ -102,8 +83,33 @@
             </dd>
 
         }
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ticket.TicketAttachment)
+        </dt>
+        <div class="mx-auto" style="width:800px;">
+            @if (Model.Attachments != null)
+            {
+                foreach (var attachment in Model.Attachments)
+                {
+                    <dd class="col-sm-10">
+                        @if (attachment.Extention == "image/jpeg")
+                        {<img width="250" height="200" src="~/Ref/@attachment.Name" /> }
+                        else if (attachment.Extention == "application/pdf")
+                        {
+                            <embed asp-action="GetFile" src="~/Ref/@attachment.Name" style="width:100%; height:800px;">
+                        }
 
+                    </dd>
+                }
+            }
+            else
+            {
+                <dd class="col-sm-10">
+                    No Attachment Found!
+                </dd>
+            }
 
+        </div>
     </dl>
     <div>
 

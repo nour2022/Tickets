@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Content Remove="Pages\Projects\Index.cshtml" />
+    <Content Remove="Pages\Register.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,14 +37,32 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Pages\Projects\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Register.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="Pages\Projects\Index.cshtml" />
+    <None Include="Pages\User_Pages\Create.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\Ref\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Register.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Pages\Login - Copy %282%29.cshtml.cs">
+      <DependentUpon>LogIn.cshtml.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Login - Copy - Copy.cshtml.cs">
+      <DependentUpon>Login - Copy.cshtml.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Login - Copy.cshtml.cs">
+      <DependentUpon>LogIn.cshtml.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

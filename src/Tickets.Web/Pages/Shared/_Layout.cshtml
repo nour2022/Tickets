@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using Tickets.Domain.Entities.UserEntity
+@inject SignInManager<User> SignInManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,7 +23,7 @@
 
     <!-- JQVMap -->
     <link rel="stylesheet" href="~/AdminLTE theme/plugins/jqvmap/jqvmap.min.css">
-   
+
     <!-- Theme style -->
     <link rel="stylesheet" href="~/AdminLTE theme/dist/css/adminlte.min.css">
     <!-- overlayScrollbars -->
@@ -28,16 +32,27 @@
     <link rel="stylesheet" href="~/AdminLTE theme/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="~/AdminLTE theme/plugins/summernote/summernote-bs4.min.css">
+    <link href="~/css/UserDetails.css" rel="stylesheet" />
     @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
-    <partial name="_Navbar" />
-    <partial name="_Sidebar" />
-
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <partial name="_Navbar" />
+        <partial name="_Sidebar" />
+    }
+    else
+    {
+        <div class="navbar-nav d-flex justify-content-end flex-grow-1">
+            <ul>
+                <li class="nav-item">
+                    <a asp-page="/Login" class="btn btn-outline-info">LogIn</a>
+                </li>
+            </ul>
+        </div>
+    }
 
     @RenderBody()
-
-
     <partial name="_Footer" />
 
 
@@ -78,4 +93,4 @@
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
-</html>
+    </html>

@@ -18,6 +18,7 @@ namespace Tickets.Web.Pages.Ticket_Pages
         [BindProperty]
         public Ticket Ticket { get; set; }
         public List<Attachment> Attachments;
+        
         public DetailsModel(TicketAppService ticketAppService)
         {
             _ticketAppService = ticketAppService;
@@ -27,8 +28,8 @@ namespace Tickets.Web.Pages.Ticket_Pages
         {
 
             Ticket = _ticketAppService.GetById(id);
-
-            // TicketAttachments.FindAll(e => e.TicketId == id);
+            Ticket.Project = _ticketAppService.GetTicketProject(Ticket);
+          
             Attachments = new List<Attachment>();
             Attachments =_ticketAppService.GetTicketAttachments(Ticket);
             

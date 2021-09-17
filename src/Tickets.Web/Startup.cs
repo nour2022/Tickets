@@ -4,11 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Tickets.Application.Services;
+using Tickets.Domain.Entities.UserEntity;
 using Tickets.Infrastrucure.Data;
 
 namespace Tickets.Web
@@ -30,7 +27,8 @@ namespace Tickets.Web
             services.AddScoped<ProjectAppService>();
             services.AddScoped<TicketAppService>();
             services.AddScoped<TicketAttachmentAppService>();
-    //        services.AddScoped<AttachmentAppService>();
+            services.AddScoped<UserAppService>();
+            services.AddIdentity<User, Role>().AddEntityFrameworkStores<TicketsDbContext>();
             services.AddRazorPages();
         }
 
@@ -49,7 +47,7 @@ namespace Tickets.Web
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

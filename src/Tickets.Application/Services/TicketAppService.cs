@@ -122,6 +122,10 @@ namespace Tickets.Application.Services
 
             return ticketAttachments;
         }
+        public Project GetTicketProject(Ticket ticket)
+        {
 
+            return DbContext.Projects.FirstOrDefault(e => e.Id == ticket.ProjectId);
+        }
     }
 }
