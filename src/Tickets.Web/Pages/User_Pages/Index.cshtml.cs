@@ -11,14 +11,14 @@ using Tickets.Domain.Entities.UserEntity;
 
 namespace Tickets.Web.Pages.User_Pages
 {
-    [Authorize(policy: "AdminAccess")]
+    [Authorize(policy: "ManagerAccess")]
     public class IndexModel : PageModel
     {
         private readonly UserAppService userAppService;
         [BindProperty]
         public List<UserDto> Users { get; set; }
         [BindProperty]
-        public UserSearchDto User { get; set; } = new UserSearchDto();
+        public UserSearchDto user { get; set; } = new UserSearchDto();
 
         public IndexModel(UserAppService userAppService)
         {

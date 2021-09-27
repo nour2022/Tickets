@@ -8,7 +8,7 @@ using Tickets.Domain.Tickets.Entities;
 
 namespace Tickets.Web.Pages.Ticket_Pages
 {
-    [Authorize(policy: "TeamAccess")]
+    [Authorize(policy: "TeamUserAccess")]
     public class IndexModel : PageModel
     {
         public TicketAppService _ticketAppService { get; private set; }
@@ -21,7 +21,7 @@ namespace Tickets.Web.Pages.Ticket_Pages
         public Priority priority { get; set; }
         public void OnGet()
         {
-            tickets = _ticketAppService.GetAll();
+            tickets = _ticketAppService.GetAll(User);
 
         }
     }

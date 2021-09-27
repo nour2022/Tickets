@@ -30,7 +30,11 @@ namespace Tickets.Web.Pages.Ticket_Pages
         public void OnGet(int id)
         {
 
-            Ticket = _ticketAppService.GetById(id);
+            Ticket = _ticketAppService.GetById(id,User);
+            if (Ticket == null)
+            {
+                RedirectToPage("../Account/AccessDenied");
+            }
             Ticket.Project = _ticketAppService.GetTicketProject(Ticket);
           
             Attachments = new List<Attachment>();

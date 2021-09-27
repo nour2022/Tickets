@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Tickets.Domain.Tickets.Entities;
@@ -49,12 +50,22 @@ namespace Tickets.Application.Services
             Commit();
         }
 
+        public void Insert(TicketAttachment entity, ClaimsPrincipal user)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(int id)
         {
             throw new NotImplementedException();
         }
 
         public void Update(TicketAttachment entity, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(int id, ClaimsPrincipal user)
         {
             throw new NotImplementedException();
         }

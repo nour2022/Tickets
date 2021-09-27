@@ -24,13 +24,15 @@ namespace Tickets.Web.Pages.Projects
         }
         public void OnGet(int id)
         {
-            Project = _projectAppService.Find(id);
+            Project = _projectAppService.Find(id,User);
         }
         public IActionResult OnPost(int id)
         {
-            _projectAppService.Delete(id);
-            _projectAppService.Commit();
-            return RedirectToPage("./Index");
+           if( _projectAppService.Delete(id,User))
+            {
+                return RedirectToPage("./Index");
+            }
+            return RedirectToPage("../Account/AccessDenied");
         }
     }
 }

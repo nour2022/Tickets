@@ -34,13 +34,18 @@ namespace Tickets.Web.Pages.Ticket_Pages
         }
         public void OnGet(int id)
         {
-            Ticket = _ticketAppService.GetById(id);
+            Ticket = _ticketAppService.GetById(id,User);
+            if(Ticket == null)
+            {
+                RedirectToPage("../Account/AccessDenied");
+            }
         }
         public void OnPost(int id)
         {
             if(File != null)
             {
-                Ticket = _ticketAppService.GetById(id);
+                Ticket = _ticketAppService.GetById(id,User);
+
                 string path = getImgUrl();
                 Ticket.TicketAttachment = new List<TicketAttachment>
                 {
@@ -58,7 +63,7 @@ namespace Tickets.Web.Pages.Ticket_Pages
                 };
             }
             _ticketAppService.Update(Ticket, id,User);
-           
+            RedirectToPage("./Index");
         }
         private string getImgUrl()
         {

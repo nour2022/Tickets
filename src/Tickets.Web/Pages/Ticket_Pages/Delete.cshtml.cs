@@ -25,14 +25,19 @@ namespace Tickets.Web.Pages.Ticket_Pages
         }
         public void OnGet(int id)
         {
-            Ticket = _ticketAppService.GetById(id);
+            Ticket = _ticketAppService.GetById(id,User);
+            if(Ticket.StateId!=1 || Ticket.StateId != 4)
+            {
+                ModelState.AddModelError("", "The Current Ticket Is In Use..So It Can't Be Deleted Right Now!");
+            }
         }
         public IActionResult OnPost(int id)
         {
           var isDeleted= _ticketAppService.Delete(id, User);
            if(!isDeleted)
             {
-                return RedirectToPage("./Account/AccessDenied");
+                
+                return RedirectToPage("../Account/AccessDenied");
             }
             return RedirectToPage("./Index");
         }

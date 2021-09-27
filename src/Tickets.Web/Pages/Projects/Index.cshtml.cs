@@ -12,7 +12,7 @@ using Tickets.Infrastrucure.Data;
 
 namespace Tickets.Web.Pages.Projects
 {
-    [Authorize(policy: "TeamAccess")]
+    [Authorize(policy: "TeamUserAccess")]
     public class IndexModel : PageModel
     {
         private ProjectAppService _projectAppService;
@@ -23,7 +23,7 @@ namespace Tickets.Web.Pages.Projects
         public List<ProjectDto> projects { get; set; }
         public void OnGet()
         {
-            projects = _projectAppService.GetAll();
+            projects = _projectAppService.GetAll(User);
           
         }
     }

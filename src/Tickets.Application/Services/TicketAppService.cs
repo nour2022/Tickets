@@ -40,12 +40,20 @@ namespace Tickets.Application.Services
             var ticket = GetById(id,user);
 
             var ticketState = GetState(ticket);
-            if (IsAuthenticated(user,ticket,ticketState))
+            if (IsAuthenticated(user,ticket))
                  
             {
-                Delete(ticket);
-                Commit();
-                return true;
+                if (ticketState.Id == 1 || ticketState.Id == 4)
+                {
+                    Delete(ticket);
+                    Commit();
+                    return true;
+                }
+                else
+                {
+                    
+                    return false;
+                }
             }
             else
             {
@@ -60,33 +68,34 @@ namespace Tickets.Application.Services
             return true;
         }
 
-        public List<Ticket> GetAll()
+        public List<Ticket> GetAll(ClaimsPrincipal user)
         {
+                if (user.IsInRole("User"))
+                {
+                    int projectId = DbContext.Projects.FirstOrDefault(e => e.ClientName == user.Identity.Name).Id;
+                    return DbContext.Tickets.Where(t=>t.ProjectId == projectId || t.CreatedBy == user.Identity.Name).ToList();
+                }
+
             return DbContext.Tickets.ToList();
         }
 
         public Ticket GetById(int id, ClaimsPrincipal user)
         {
             var ticket = DbContext.Tickets.FirstOrDefault(t => t.Id == id);
-            if (IsAuthenticated(user, ticket,null))
+            if (IsAuthenticated(user, ticket))
             {
                 return ticket;
             }
             return null;
         }
-        public bool IsAuthenticated(ClaimsPrincipal user,Ticket ticket,TicketState? state)
+        public bool IsAuthenticated(ClaimsPrincipal user,Ticket ticket)
         {
            
             bool IsAuthenticated = user.IsInRole("Admin")
                                || user.IsInRole("Manager")
                                || user.IsInRole("Developer Team");
             bool userAccess=false;
-            if (state != null)
-            {
-                userAccess = (ticket.CreatedBy == user.Identity.Name
-                && (state.Id == 1 || state.Id == 4));
-            }
-            else if(user.IsInRole("User"))
+             if(user.IsInRole("User"))
             {
                 userAccess = ticket.CreatedBy == user.Identity.Name;
             }
@@ -177,6 +186,11 @@ namespace Tickets.Application.Services
         public Ticket GetById(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Ticket> GetAll()
+        {
+            return DbContext.Tickets.ToList();
         }
     }
 }

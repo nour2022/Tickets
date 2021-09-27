@@ -22,13 +22,17 @@ namespace Tickets.Web.Pages.Projects
         }
         public void OnGet(int id)
         {
-            Project = _projectAppService.Find(id);
+            Project = _projectAppService.Find(id,User);
+            if (Project == null)
+            {
+                RedirectToPage("../Account/AccessDenied");
+            }
         }
         public IActionResult OnPost(int id)
         {
 
-            _projectAppService.Update(Project, id);
-            _projectAppService.Commit();
+            _projectAppService.Update(Project, id,User);
+          
             return RedirectToPage("./Index");
         }
     }

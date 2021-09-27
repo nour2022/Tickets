@@ -11,19 +11,19 @@
                         <div class="col-sm-4 bg-c-lite-green user-profile">
                             <div class="card-block text-center text-white">
                                 <div class="m-b-25">
-                                    @if (@Model.User.ProfileImage == null)
+                                    @if (@Model.user.ProfileImage == null)
                                     {
                                         <img src="~/Ref/user.png" class="img-radius" alt="User-Profile-Image">
                                     }
                                     else
                                     {
-                                        <img src="~/Ref/@Model.User.ProfileImage" class="img" alt="User-Profile-Image">
+                                        <img src="~/Ref/@Model.user.ProfileImage" class="img" alt="User-Profile-Image">
                                     }
 
                                 </div>
 
 
-                                <h6 class="f-w-600">@Model.User.UserName</h6>
+                                <h6 class="f-w-600">@Model.user.UserName</h6>
                                 <p>Role</p> <a class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16" asp-page="Edit"></a>
                             </div>
                         </div>
@@ -35,14 +35,14 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <p class="m-b-10 f-w-600">Email</p>
-                                                <h6 class="text-muted f-w-400">@Model.User.Email</h6>
+                                                <h6 class="text-muted f-w-400">@Model.user.Email</h6>
                                             </div>
                                         </div>
                                     
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <p class="m-b-10 f-w-600">Phone</p>
-                                                    <h6 class="text-muted f-w-400">@Model.User.PhoneNumber</h6>
+                                                    <h6 class="text-muted f-w-400">@Model.user.PhoneNumber</h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -51,14 +51,14 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <p class="m-b-10 f-w-600">Full Name</p>
-                                                    <h6 class="text-muted f-w-400">@Model.User.FullName</h6>
+                                                    <h6 class="text-muted f-w-400">@Model.user.FullName</h6>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <a asp-page="Index" class="btn btn-outline-primary">Back</a>
 
-                                            <input type="submit" value="Delete" class="btn btn-danger" asp-route-id="@Model.User.Id" />
+                                            <input type="submit" value="Delete" class="btn btn-danger" asp-route-id="@Model.user.Id" />
 
                                         </div>
                                     </div>

@@ -15,14 +15,18 @@ namespace Tickets.Web.Pages.User_Pages
     {
         private readonly UserAppService userAppService;
         [BindProperty]
-        public UserDto User { get; set; }
+        public UserDto user { get; set; }
         public DeleteModel(UserAppService _userAppService)
         {
             userAppService = _userAppService;
         }
         public void OnGet( int id )
         {
-            User = userAppService.Find(id);
+            user = userAppService.Find(id,User);
+            if(user == null)
+            {
+                RedirectToPage("../Account/AccessDenied");
+            }
         }
         public IActionResult OnPost(int id)
         {

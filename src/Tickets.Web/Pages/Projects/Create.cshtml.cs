@@ -24,8 +24,8 @@ namespace Tickets.Web.Pages.Projects
 
         public IActionResult OnPost()
         {
-            _projectAppService.Insert(project);
-            _projectAppService.Commit();
+            _projectAppService.Insert(project,User);
+           
             return RedirectToPage("./Index");
         }
     }

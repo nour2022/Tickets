@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Tickets.Application.DTOs;
@@ -50,6 +51,17 @@ namespace Tickets.Application.Services
             return result;
            
             
+        }
+        public bool IsAuthenticated(ClaimsPrincipal user,User userDto)
+        {
+            bool IsAuthenticated = user.IsInRole("Admin") || user.IsInRole("Manager");
+            bool userAccess = false;
+            if (user.IsInRole("User") || user.IsInRole("Developer Team"))
+            {
+                userAccess = user.Identity.Name == userDto.UserName;
+            }
+            return IsAuthenticated || userAccess;
+          
         }
         public async Task<SignInResult> LogIn(UserRegistration User)
         {
@@ -109,21 +121,30 @@ namespace Tickets.Application.Services
             ticketDbContext.Users.Remove(user);
             ticketDbContext.SaveChanges();
         }
-        public UserDto Find(int id)
+        public UserDto Find(int id,ClaimsPrincipal UserClaims)
         {
+           
             User user = new User();
             user = ticketDbContext.Users.FirstOrDefault(e => e.Id == id);
-            UserDto userDto = new UserDto()
+            if (IsAuthenticated(UserClaims, user))
             {
-                Email = user.Email,
-                FullName= user.FullName,
-                Id = user.Id,
-                PhoneNumber = user.PhoneNumber,
-                UserName = user.UserName,
-                ProfileImage = user.ProfileImage,
-                Role = roleAppService.GetRole(id)
-            };
-            return userDto;
+                UserDto userDto = new UserDto()
+                {
+                    Email = user.Email,
+                    FullName = user.FullName,
+                    Id = user.Id,
+                    PhoneNumber = user.PhoneNumber,
+                    UserName = user.UserName,
+                    ProfileImage = user.ProfileImage,
+                    Role = roleAppService.GetRole(id)
+                };
+                return userDto;
+            }
+            else
+            {
+                return null;
+            }
+               
         }
         public void Edit(UserDto updatedUser , int id)
         {
@@ -132,6 +153,7 @@ namespace Tickets.Application.Services
             user.FullName = updatedUser.FullName;
             user.Email = updatedUser.Email;
             user.PhoneNumber = updatedUser.PhoneNumber;
+            
             if(updatedUser.ProfileImage != null)
                 user.ProfileImage = updatedUser.ProfileImage;
             ticketDbContext.Update(user);

@@ -8,6 +8,12 @@
     <h4>Ticket #@Model.Ticket.Id</h4>
     <hr />
     <form asp-action="Delete">
+        @if (ViewBag.Message != null)
+        {
+            <h5 class="alert alert-warning">@ViewBag.Message</h5>
+        }
+        <div asp-validation-summary="ModelOnly" class="text text-bold text-warning"></div>
+
         <dl class="row">
 
 

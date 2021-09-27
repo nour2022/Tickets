@@ -11,7 +11,7 @@ using Tickets.Domain.Projects.Entities;
 
 namespace Tickets.Web.Pages.Projects
 {
-    [Authorize(policy: "UserAccess")]
+    [Authorize(policy: "TeamUserAccess")]
     public class DetailsModel : PageModel
     {
         [BindProperty]
@@ -26,7 +26,11 @@ namespace Tickets.Web.Pages.Projects
         }
         public void OnGet(int id)
         {
-            Project = _projectAppService.Find(id);
+            Project = _projectAppService.Find(id,User);
+          if(Project == null)
+            {
+                RedirectToPage("../Account/AccessDenied");
+            }
         }
         
     }
