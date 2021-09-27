@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ using Tickets.Domain.Tickets.Entities;
 
 namespace Tickets.Web.Pages.Ticket_Pages
 {
+    [Authorize(policy: "TeamAccess")]
     public class EditModel : PageModel
     {
         private TicketAppService _ticketAppService;
@@ -55,8 +57,8 @@ namespace Tickets.Web.Pages.Ticket_Pages
                     }
                 };
             }
-            _ticketAppService.Update(Ticket, id);
-            _ticketAppService.Commit();
+            _ticketAppService.Update(Ticket, id,User);
+           
         }
         private string getImgUrl()
         {

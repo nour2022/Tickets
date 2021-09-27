@@ -9,32 +9,39 @@
     <div>
         <h4>Project #@Model.Project.Id</h4>
         <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Project.Title)
-            </dt>
-            <dd class="col-sm-2">
-                @Html.DisplayFor(model => model.Project.Title)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Project.ProjectType)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Project.ProjectType)
-            </dd>
+        <form asp-action="Delete">
+            <dl class="col">
+                <div class="form-group">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Project.Title)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Project.Title)
+                    </dd>
+                </div>
+                    <div class="form-group">
+                        <dt class="col-sm-2">
+                           Project Type
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Project.ProjectType.Type)
+                        </dd>
+                    </div>
+                        <div class="form-group">
+                            <dt class="col-sm-2">
+                                @Html.DisplayNameFor(model => model.Project.ClientName)
+                            </dt>
+                            <dd class="col-sm-2">
+                                @Html.DisplayFor(model => model.Project.ClientName)
+                            </dd>
+                            </div>
+</dl>
 
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Project.ClientName)
-            </dt>
-            <dd class="col-sm-2">
-                @Html.DisplayFor(model => model.Project.ClientName)
-            </dd>
+            <div class="form-group">
+                <input type="submit" value="Delete" class="btn btn-danger" asp-route-id="@Model.Project.Id" />
 
-        </dl>
-
-        <div asp-action="Delete">
-            <a class="btn btn-danger" asp-route-id="@Model.Project.Id">Delete</a>
-            <a asp-page="Index" class="btn btn-outline-dark">Back to List</a>
-        </div>
+                <a asp-page="Index" class="btn btn-outline-dark">Back to List</a>
+            </div>
+        </form>
     </div>
 </div>

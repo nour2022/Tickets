@@ -40,19 +40,21 @@
     {
         <partial name="_Navbar" />
         <partial name="_Sidebar" />
+
     }
     else
     {
         <div class="navbar-nav d-flex justify-content-end flex-grow-1">
             <ul>
                 <li class="nav-item">
-                    <a asp-page="/Login" class="btn btn-outline-info">LogIn</a>
+                    <a asp-page="../Account/Login" class="btn btn-outline-info">LogIn</a>
                 </li>
             </ul>
         </div>
+       
     }
-
     @RenderBody()
+
     <partial name="_Footer" />
 
 

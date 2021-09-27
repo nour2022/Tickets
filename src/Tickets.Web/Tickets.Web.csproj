@@ -46,23 +46,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Ref\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <UpToDateCheckInput Remove="Pages\Register.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Pages\Login - Copy %282%29.cshtml.cs">
-      <DependentUpon>LogIn.cshtml.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\Login - Copy - Copy.cshtml.cs">
-      <DependentUpon>Login - Copy.cshtml.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\Login - Copy.cshtml.cs">
-      <DependentUpon>LogIn.cshtml.cs</DependentUpon>
-    </Compile>
+    <Content Include="Pages\Logout.cshtml.cs" />
   </ItemGroup>
 
 </Project>

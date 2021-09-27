@@ -6,7 +6,10 @@
 .padding {
     padding: 3rem !important
 }
-
+.bottom-right{
+   
+    align-content:start
+}
 .user-card-full {
     overflow: hidden
 }

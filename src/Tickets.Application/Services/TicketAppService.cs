@@ -28,19 +28,34 @@ namespace Tickets.Application.Services
                 return false;
         }
 
-        public bool Delete(int id)
+        //public bool Delete(int id)
+        //{
+        //   //var ticket = GetById(id,user);
+           
+        //  //  return Delete(ticket);
+        //}
+
+        public bool Delete(int id, ClaimsPrincipal user)
         {
-            var ticket = GetById(id);
-            return Delete(ticket);
+            var ticket = GetById(id,user);
+
+            var ticketState = GetState(ticket);
+            if (IsAuthenticated(user,ticket,ticketState))
+                 
+            {
+                Delete(ticket);
+                Commit();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+           
         }
 
-        public bool Delete(Ticket entity)
+        private bool Delete(Ticket entity)
         {
-           //var projectTicket= DbContext.Projects.FirstOrDefault(t => t.Tickets.FirstOrDefault(s => s.Id == entity.Id) != null);
-           // if(projectTicket != null)
-           // {
-           //     DbContext.Projects.FirstOrDefault(s => s.Tickets.Remove(entity));
-           // }
             DbContext.Tickets.Remove(entity);
             return true;
         }
@@ -50,30 +65,59 @@ namespace Tickets.Application.Services
             return DbContext.Tickets.ToList();
         }
 
-        public Ticket GetById(int id)
+        public Ticket GetById(int id, ClaimsPrincipal user)
         {
-            return DbContext.Tickets.FirstOrDefault(t => t.Id == id);
+            var ticket = DbContext.Tickets.FirstOrDefault(t => t.Id == id);
+            if (IsAuthenticated(user, ticket,null))
+            {
+                return ticket;
+            }
+            return null;
         }
-
-        public void Insert(Ticket entity)
+        public bool IsAuthenticated(ClaimsPrincipal user,Ticket ticket,TicketState? state)
         {
-            //var currentUser = DbContext.Users.Find(ClaimTypes.Name);
-           // entity.CreatedBy = " ";
+           
+            bool IsAuthenticated = user.IsInRole("Admin")
+                               || user.IsInRole("Manager")
+                               || user.IsInRole("Developer Team");
+            bool userAccess=false;
+            if (state != null)
+            {
+                userAccess = (ticket.CreatedBy == user.Identity.Name
+                && (state.Id == 1 || state.Id == 4));
+            }
+            else if(user.IsInRole("User"))
+            {
+                userAccess = ticket.CreatedBy == user.Identity.Name;
+            }
+            if (IsAuthenticated || userAccess)
+            {
+                return true;
+            }
+            return false;
+               
+        }
+        public void Insert(Ticket entity, ClaimsPrincipal user)
+        {
+           
+            entity.CreatedBy = user.Identity.Name;
             entity.CreatedOn = DateTime.Now;
 
             DbContext.Tickets.Add(entity);
+            Commit();
         }
 
-        public void Update(int id)
+        public void Update(int id, ClaimsPrincipal user)
         {
-            var ticket = GetById(id);
-            Update(ticket,id);
+            var ticket = GetById(id,user);
+            Update(ticket,id,user);
+           
         }
 
-        public void Update(Ticket updatedTicket , int id)
+        public void Update(Ticket updatedTicket , int id, ClaimsPrincipal user)
         {
 
-            var ticket = GetById(id);
+            var ticket = GetById(id,user);
 
             ticket.Title = updatedTicket.Title;
             ticket.Type = GetType(updatedTicket);
@@ -84,8 +128,9 @@ namespace Tickets.Application.Services
             ticket.StateId = updatedTicket.StateId;
             ticket.Description = updatedTicket.Description;
             ticket.UpdatedOn = DateTime.Now;
-            ticket.UpdatedBy = " /0";
+            ticket.UpdatedBy = user.Identity.Name;
             DbContext.Update(ticket);
+            Commit();
         }
         public Priority GetPriority(Ticket ticket)
         {
@@ -105,11 +150,7 @@ namespace Tickets.Application.Services
                    .TicketStates
                    .FirstOrDefault(e => e.Id == ticket.StateId);
         }
-        public List<Project> SelectAllProjects()
-        {
-
-            return DbContext.Projects.ToList();
-        }
+       
         public List<Attachment> GetTicketAttachments(Ticket ticket)
         {
             List<int> ids = new List<int>();
@@ -126,6 +167,16 @@ namespace Tickets.Application.Services
         {
 
             return DbContext.Projects.FirstOrDefault(e => e.Id == ticket.ProjectId);
+        }
+
+        public bool Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Ticket GetById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

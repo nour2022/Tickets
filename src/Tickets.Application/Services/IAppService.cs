@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Claims;
 using Tickets.Domain.Projects.Entities;
 
 namespace Tickets.Application.Services
@@ -8,11 +9,11 @@ namespace Tickets.Application.Services
     {
         bool Commit();
         bool Delete(int id);
-        bool Delete(TEntity entity);
+      
         List<TEntity> GetAll();
         TEntity GetById(int id);
-        void Insert(TEntity entity);
-        void Update(int id);
-        void Update(TEntity entity,int id);
+        void Insert(TEntity entity, ClaimsPrincipal user);
+        void Update(int id,ClaimsPrincipal user);
+       
     }
 }

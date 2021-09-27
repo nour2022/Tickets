@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using Tickets.Domain.Tickets.Entities;
 
 namespace Tickets.Web.Pages.Ticket_Pages
 {
+    [Authorize(policy: "TeamAccess")]
     public class IndexModel : PageModel
     {
         public TicketAppService _ticketAppService { get; private set; }

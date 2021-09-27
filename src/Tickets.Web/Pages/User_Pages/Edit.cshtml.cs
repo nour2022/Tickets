@@ -29,7 +29,7 @@ namespace Tickets.Web.Pages.User_Pages
         {
             User = userAppService.Find(id);
         }
-        public void OnPost(int id)
+        public IActionResult OnPost(int id)
         {
             if(File != null)
             {
@@ -42,6 +42,7 @@ namespace Tickets.Web.Pages.User_Pages
                 User.ProfileImage = getImgUrl();
             }
             userAppService.Edit(User, id);
+            return RedirectToPage("./Index");
         }
         private string getImgUrl()
         {

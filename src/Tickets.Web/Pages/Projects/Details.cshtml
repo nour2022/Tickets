@@ -19,11 +19,11 @@
         </dd>
         <dt class="col-sm-2">
 
-            @Html.DisplayNameFor(model => model.Project.TypeId)
+            @Html.DisplayNameFor(model => model.Project.ProjectType.Id)
         </dt>
         <dd class="col-sm-10">
            
-            @Model._projectAppService.GetProjectStatus(Model.Project.TypeId).Status
+            @Model._projectAppService.GetProjectStatus(Model.Project.ProjectType.Id).Status
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Project.ClientName)
@@ -31,7 +31,7 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Project.ClientName)
         </dd>
-        <dt class="col-sm-2">
+        @*<dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Project.CreatedOn)
         </dt>
         <dd class="col-sm-10">
@@ -58,7 +58,7 @@
                 @Html.DisplayFor(model => model.Project.UpdatedOn)
             </dd>
 
-        }
+        }*@
 
 
     </dl>

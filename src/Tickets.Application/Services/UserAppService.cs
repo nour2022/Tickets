@@ -14,18 +14,22 @@ namespace Tickets.Application.Services
     {
         public TicketsDbContext ticketDbContext { get; set; }
         private UserManager<User> userManager;
+        private readonly RoleAppService roleAppService;
         private SignInManager<User> signInManager;
 
         public UserAppService(UserManager<User> userManager,
+                            RoleAppService roleAppService,
                             SignInManager<User> signInManager,
                             TicketsDbContext ticketsDb)
         {
             this.userManager = userManager;
+            this.roleAppService = roleAppService;
             this.signInManager = signInManager;
             ticketDbContext = ticketsDb;
         }
-        public async Task<IdentityResult> Insert(UserRegistration User)
+        public async Task<IdentityResult> Insert(UserRegistration User,int roleId)
         {
+            string role = ticketDbContext.Roles.Find(roleId).Name;
                 var result = await userManager.CreateAsync(new User
                 {
                     UserName = User.UserName,
@@ -33,11 +37,12 @@ namespace Tickets.Application.Services
                     FullName = User.FullName,
                     PhoneNumber = User.PhoneNumber
                 }, User.Password);
-
+            var user = await userManager.FindByNameAsync(User.UserName);
+           await userManager.AddToRoleAsync(user, role);
                 if (result.Succeeded)
                 {
                
-                    await signInManager.PasswordSignInAsync(User.UserName, User.Password, true, false);
+                  //  await signInManager.PasswordSignInAsync(User.UserName, User.Password, true, false);
                    
 
                 }
@@ -115,7 +120,8 @@ namespace Tickets.Application.Services
                 Id = user.Id,
                 PhoneNumber = user.PhoneNumber,
                 UserName = user.UserName,
-                ProfileImage = user.ProfileImage
+                ProfileImage = user.ProfileImage,
+                Role = roleAppService.GetRole(id)
             };
             return userDto;
         }

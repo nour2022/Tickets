@@ -11,7 +11,6 @@ namespace Tickets.Domain.Projects.Entities
         public string ClientName { get; set; }
         public int TypeId { get; set; }
         public List<ProjectTeam> ProjectTeams { get; set; }
-
         public List<Ticket> Tickets { get; set; }
     }
 }

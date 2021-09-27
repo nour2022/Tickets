@@ -26,7 +26,7 @@ namespace Tickets.Web.Pages
         public async Task<IActionResult> OnPostAsync()
         {
             await signInManager.SignOutAsync();
-            return RedirectToPage("/LogIn");
+            return RedirectToPage("Account/Login");
         }
         }
 }

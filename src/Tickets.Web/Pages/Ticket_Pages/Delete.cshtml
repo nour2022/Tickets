@@ -4,77 +4,92 @@
 }
 
 <div class="mx-auto" style="width:1100px;">
-    <h1>Details</h1>
+    <h1>Delete</h1>
     <h4>Ticket #@Model.Ticket.Id</h4>
     <hr />
-    <dl class="row">
+    <form asp-action="Delete">
+        <dl class="row">
 
 
+            <div class="form-group">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Ticket.Title)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Ticket.Title)
+                </dd>
+            </div>
+            <div class="form-group">
+                <dt class="col-sm-2">
 
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Ticket.Title)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Ticket.Title)
-        </dd>
-        <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Ticket.Priority)
+                </dt>
+                <dd class="col-sm-10">
 
-            @Html.DisplayNameFor(model => model.Ticket.Priority)
-        </dt>
-        <dd class="col-sm-10">
+                    @Model._ticketAppService.GetPriority(Model.Ticket).Type
+                </dd>
+            </div>
+            <div class="form-group">
+                <dt class="col-sm-2">
 
-            @Model._ticketAppService.GetPriority(Model.Ticket).Type
-        </dd>
-        <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Ticket.Type)
+                </dt>
+                <dd class="col-sm-10">
 
-            @Html.DisplayNameFor(model => model.Ticket.Type)
-        </dt>
-        <dd class="col-sm-10">
+                    @Model._ticketAppService.GetType(Model.Ticket).Type
+                </dd>
+            </div>
+            <div class="form-group">
+                <dt class="col-sm-2">
 
-            @Model._ticketAppService.GetType(Model.Ticket).Type
-        </dd>
-        <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Ticket.State)
+                </dt>
+                <dd class="col-sm-10">
 
-            @Html.DisplayNameFor(model => model.Ticket.State)
-        </dt>
-        <dd class="col-sm-10">
+                    @Model._ticketAppService.GetState(Model.Ticket).Type
+                </dd>
+            </div>
+            <div class="form-group">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Ticket.CreatedOn)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Ticket.CreatedOn)
+                </dd>
+            </div>
+            <div class="form-group">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Ticket.CreatedBy)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Ticket.CreatedBy)
+                </dd>
+            </div>
+            @if (Model.Ticket.UpdatedOn != null)
+            {
+                <div class="form-group">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Ticket.UpdatedBy)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Ticket.UpdatedBy)
+                    </dd>
+                </div>
+                <div class="form-group">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Ticket.UpdatedOn)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Ticket.UpdatedOn)
+                    </dd>
+                </div>
+            }
 
-            @Model._ticketAppService.GetState(Model.Ticket).Type
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Ticket.CreatedOn)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Ticket.CreatedOn)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Ticket.CreatedBy)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Ticket.CreatedBy)
-        </dd>
-        @if (Model.Ticket.UpdatedOn != null)
-        {
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Ticket.UpdatedBy)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Ticket.UpdatedBy)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Ticket.UpdatedOn)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Ticket.UpdatedOn)
-            </dd>
+        </dl>
 
-        }
-
-    </dl>
-
-    <div asp-action="Delete">
-        <input type="submit" value="Delete" class="btn btn-danger" asp-route-id="@Model.Ticket.Id" />
-        <a asp-page="Index" class="btn btn-outline-dark">Back to List</a>
-    </div>
-
+        <div class="form-group">
+            <input type="submit" value="Delete" class="btn btn-danger" asp-route-id="@Model.Ticket.Id" />
+            <a asp-page="Index" class="btn btn-outline-dark">Back to List</a>
+        </div>
+    </form>
 </div>

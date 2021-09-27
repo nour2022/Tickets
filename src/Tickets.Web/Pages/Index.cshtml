@@ -1,21 +1,18 @@
-﻿@page
+﻿
+@page
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
+
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Dashboard</h1>
+                <h1 class="m-0" >Welcome @User.Identity.Name..</h1>
             </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard v1</li>
-                </ol>
-            </div><!-- /.col -->
+
         </div><!-- /.row -->
     </div><!-- /.container-fluid -->
 </div>
@@ -29,14 +26,14 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>150</h3>
+                        <h3>@Model.TicketCount</h3>
 
-                        <p>New Orders</p>
+                        <p># of Tickets</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a asp-page="Ticket_Pages/index" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -44,9 +41,9 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>53<sup style="font-size: 20px">%</sup></h3>
+                        <h3>@Model.TicketCompleted<sup style="font-size: 20px">%</sup></h3>
 
-                        <p>Bounce Rate</p>
+                        <p>Ticket Completed</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -59,9 +56,9 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3>44</h3>
+                        <h3>@Model.UserCount</h3>
 
-                        <p>User Registrations</p>
+                        <p># of Users</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
@@ -74,9 +71,9 @@
                 <!-- small box -->
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3>65</h3>
+                        <h3>@Model.ProjectCount</h3>
 
-                        <p>Unique Visitors</p>
+                        <p># of Projects</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
@@ -96,7 +93,7 @@
                     <div class="card-header">
                         <h3 class="card-title">
                             <i class="fas fa-chart-pie mr-1"></i>
-                            Sales
+                            Statistics
                         </h3>
                         <div class="card-tools">
                             <ul class="nav nav-pills ml-auto">
@@ -595,4 +592,3 @@
     </div><!-- /.container-fluid -->
 </section>
 <!-- /.content -->
-

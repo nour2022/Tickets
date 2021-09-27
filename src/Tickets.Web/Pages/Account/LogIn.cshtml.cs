@@ -5,21 +5,20 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Tickets.Application.DTOs;
+using Tickets.Application.Services;
 using Tickets.Domain.Entities.UserEntity;
 
-namespace Tickets.Web.Pages
+namespace Tickets.Web.Pages.Account
 {
-    public class LoginModel : PageModel
+    public class LogInModel : PageModel
     {
-        private readonly UserManager<User> userManager;
-        private readonly SignInManager<User> signInManager;
+        public UserAppService userAppService { get; set; }
         [BindProperty]
-        public User User { get; set; }
-        public LoginModel(UserManager<User> userManager,
-                           SignInManager<User> signInManager)
+        public UserRegistration User { get; set; }
+        public LogInModel(UserAppService _userAppService)
         {
-            this.userManager = userManager;
-            this.signInManager = signInManager;
+            userAppService = _userAppService;
         }
         public void OnGet()
         {
@@ -28,19 +27,19 @@ namespace Tickets.Web.Pages
         {
             if (ModelState.IsValid)
             {
-               var identityResult = await signInManager.PasswordSignInAsync(User.Email, User.PasswordHash, false, false);
-                if (identityResult.Succeeded)
+                var identityResult = userAppService.LogIn(User);
+                if (identityResult.Result.Succeeded)
                 {
                     if (returnUrl == null || returnUrl == "/")
                     {
-                        return RedirectToPage("Index");
+                        return RedirectToPage("../Index");
 
                     }
                     else
                     {
                         return RedirectToPage(returnUrl);
                     }
-                
+
                 }
                 ModelState.AddModelError("", "Email or Password is incorrect!");
             }

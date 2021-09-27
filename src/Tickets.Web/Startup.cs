@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -28,8 +29,38 @@ namespace Tickets.Web
             services.AddScoped<TicketAppService>();
             services.AddScoped<TicketAttachmentAppService>();
             services.AddScoped<UserAppService>();
+            services.AddScoped<RoleAppService>();
             services.AddIdentity<User, Role>().AddEntityFrameworkStores<TicketsDbContext>();
             services.AddRazorPages();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminAccess", p => p.RequireRole("Admin"));
+
+                options.AddPolicy("ManagerAccess",
+                    p => p.RequireAssertion(c =>
+                       c.User.IsInRole("Admin") 
+                    || c.User.IsInRole("Manager")));
+                options.AddPolicy("TeamAccess",
+                   p => p.RequireAssertion(c =>
+                      c.User.IsInRole("Admin")
+                   || c.User.IsInRole("Manager")
+                   || c.User.IsInRole("Development Team")
+                    ));
+                options.AddPolicy("UserAccess",
+                    p => p.RequireAssertion(c => 
+                       c.User.IsInRole("Admin") 
+                    || c.User.IsInRole("Manager")
+                   
+                    || c.User.IsInRole("User")));
+
+                options.AddPolicy("TeamUserAccess",
+                  p => p.RequireAssertion(c =>
+                     c.User.IsInRole("Admin")
+                  || c.User.IsInRole("Manager")
+                  || c.User.IsInRole("Developer Team")
+                  || c.User.IsInRole("User")));
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

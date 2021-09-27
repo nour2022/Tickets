@@ -18,7 +18,7 @@
                     <input asp-for="project.Title" class="form-control" />
                     <span asp-validation-for="project.Title" class="text-danger"></span>
                 </div>
-                <select asp-for="project.TypeId" asp-items="Html.GetEnumSelectList<Tickets.Domain.Entities.StatusType>()">
+                <select asp-for="project.ProjectType.Id" asp-items="Html.GetEnumSelectList<Tickets.Domain.Entities.StatusType>()">
                     <option value=" ">Select Status</option>
 
                 </select>
@@ -27,11 +27,7 @@
                     <input asp-for="project.ClientName" class="form-control" />
                     <span asp-validation-for="project.ClientName" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="project.CreatedBy" class="control-label"></label>
-                    <input asp-for="project.CreatedBy" class="form-control" />
-                    <span asp-validation-for="project.CreatedBy" class="text-danger"></span>
-                </div>
+               
 
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Tickets.Application.DTOs;
@@ -10,6 +11,7 @@ using Tickets.Domain.Entities.UserEntity;
 
 namespace Tickets.Web.Pages.User_Pages
 {
+    [Authorize(policy: "AdminAccess")]
     public class IndexModel : PageModel
     {
         private readonly UserAppService userAppService;

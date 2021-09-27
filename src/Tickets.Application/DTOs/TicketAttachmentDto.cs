@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace Tickets.Web.ViewModel
+namespace Tickets.Application.DTOs
 {
-    public class Register
+    class TicketAttachmentDto
     {
     }
 }
